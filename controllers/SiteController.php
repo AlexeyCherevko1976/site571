@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Signup;
 
 class SiteController extends Controller
 {
@@ -59,6 +60,13 @@ class SiteController extends Controller
      *
      * @return string
      */
+    public function actionSignup(){
+        $model=new Signup();
+        if (isset($_POST['Signup'])){
+            var_dump($_POST['Signup']);die();
+        }
+        return $this->render('signup', ['model'=>$model]);
+    }
     public function actionIndex()
     {
         return $this->render('index');
