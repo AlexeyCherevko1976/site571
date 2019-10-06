@@ -63,7 +63,12 @@ class SiteController extends Controller
     public function actionSignup(){
         $model=new Signup();
         if (isset($_POST['Signup'])){
-            var_dump($_POST['Signup']);die();
+            $model->attributes=Yii::$app->request->post('Signup');
+            //$model->email=$_POST['Signup']['email'];
+            if($model->validate()){
+                $model->signup();
+                return $this->goHome();
+            }
         }
         return $this->render('signup', ['model'=>$model]);
     }
