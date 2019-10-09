@@ -18,7 +18,7 @@ class Signup extends Model{
     public function signup(){
     	$user=new User();
     	$user->email=$this->email;
-    	$user->password=sha1($this->password);
+    	$user->setPassword($this->password);
     	return $user->save(); //вернет true или false
     }
 }
