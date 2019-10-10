@@ -10,9 +10,10 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Signup;
+use app\models\Login;
 
 class SiteController extends Controller
-{
+{ 
     /**
      * {@inheritdoc}
      */
@@ -84,18 +85,12 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+        $model=new Login;
+        if(Yii::$app->request->post('Login')){
+            var_dump(Yii::$app->request->post('Login'));die();
         }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
         return $this->render('login', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
