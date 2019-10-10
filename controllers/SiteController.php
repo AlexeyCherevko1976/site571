@@ -87,7 +87,10 @@ class SiteController extends Controller
     {
         $model=new Login;
         if(Yii::$app->request->post('Login')){
-            var_dump(Yii::$app->request->post('Login'));die();
+            $model->attributes=Yii::$app->request->post('Login');
+            if($model->validate()){
+                var_dump('Мы прошли валидацию');die();
+            }
         }
         return $this->render('login', [
             'model' => $model
