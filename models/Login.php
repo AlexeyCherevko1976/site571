@@ -13,9 +13,15 @@ class Login extends Model{
         ];
     } 
     public function validatePassword($attribute, $params){
-    	$user=User::findOne(['email'=>$this->email]);
-    	if(!$user || ($user->password != sha1($this->password))){
-    		$this->addError($attribute, 'Пароль или пользователь введены неверно');
+    	if(!this->hasErrors()){
+    		$user=$this->getUser(); //получаем пользователя для дальнейшего сравнения пароля
+    		if(!$user || !$user->validatePassword($this->password)){
+    			$this->addError($attribute, 'Пароль ли имейл введены не верно');
+    		}
     	}
-    }	
+    }
+    public function getUser(){
+    	return User::findOne(['email'=>$this->email]);
+    	// А получаем мы по введенному имейлу
+    }
 }
