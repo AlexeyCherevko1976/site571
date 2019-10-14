@@ -89,8 +89,15 @@ class SiteController extends Controller
         if(Yii::$app->request->post('Login')){
             $model->attributes=Yii::$app->request->post('Login');
             if($model->validate()){
-                Yii::$app->user->login($model->getUser());
+/*                $isGuest=Yii::$app->user->isGuest;
+                $identity=Yii::$app->user->identity;
+                $id=Yii::$app->user->id;
+                var_dump($isGuest);
+                var_dump($identity);
+                var_dump($id);
+                die();*/
                 return $this->goHome();
+
             }
         }
         return $this->render('login', [
